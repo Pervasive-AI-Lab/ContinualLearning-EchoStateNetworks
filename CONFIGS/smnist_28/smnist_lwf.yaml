@@ -1,0 +1,67 @@
+exp_type: 'smnist_esn'
+pixels: 28
+strategy: 'lwf' # replay, lwf, ewc
+
+dataroot: '/data/cossu'
+result_folder: '/data/cossu/experiments/esn/smnist_row/lwf'
+assess_runs: 5
+
+no_ray: false
+max_cpus: 50
+cpus_per_job: 3
+cuda: true
+max_gpus: 2
+gpus_per_job: 0.33
+
+### ESN
+esn_units: 500
+esn_layers: 1
+spectral_radius: 0.99
+input_scaling: 1
+feedforward_layers: 1
+leaky: 1
+
+### OPTIMIZER
+learning_rate: 1e-3
+epochs: 10
+batch_size: 128
+opt_name: 'adam'
+
+### LWF
+lwf_temperature: 1
+lwf_alpha:
+  - 0 # 0
+  - 0.5 # 1/2
+  - 1.33333 # 2 * 2/3
+  - 2.25 # 3 * 3/4
+  - 3.2 # 4 * 4/5
+
+# GRID SEARCH
+grid:
+  esn_units:
+    - 500
+    - 1000
+  leaky:
+    - 0.1
+    - 1
+  lwf_alpha:
+    -
+      - 0
+      - 0.5
+      - 1.33333
+      - 2.25
+      - 3.2
+    - 1
+  lwf_temperature:
+    - 0.5
+    - 1
+    - 1.5
+    - 2
+  spectral_radius:
+    - 0.99
+    - 1.5
+    - 0.5
+  input_scaling:
+    - 1
+    - 0.5
+    - 1.5

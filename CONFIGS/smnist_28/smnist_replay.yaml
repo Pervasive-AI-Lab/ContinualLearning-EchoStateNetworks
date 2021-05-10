@@ -1,0 +1,48 @@
+exp_type: 'smnist_esn'
+pixels: 28
+strategy: 'replay' # replay, lwf, ewc
+
+dataroot: '/data/cossu'
+result_folder: '/data/cossu/experiments/esn/smnist_row/test_replay_25'
+assess_runs: 5
+
+no_ray: false
+max_cpus: 30
+cpus_per_job: 3
+cuda: true
+max_gpus: 2
+gpus_per_job: 0.33
+
+### ESN
+esn_units: 1000
+esn_layers: 1
+spectral_radius: 0.99
+input_scaling: 1
+feedforward_layers: 1
+leaky: 0.1
+
+### OPTIMIZER
+learning_rate: 1e-3
+epochs: 10
+batch_size: 128
+opt_name: 'adam'
+
+### REPLAY
+mem_size: 25
+
+# GRID SEARCH
+grid:
+  esn_units:
+    - 500
+    - 1000
+    - 2000
+  learning_rate:
+    - 1e-2
+    - 1e-3
+  spectral_radius:
+    - 0.99
+    - 1.5
+    - 0.5
+  leaky:
+    - 0.1
+    - 1

@@ -1,0 +1,46 @@
+exp_type: 'smnist_esn'
+pixels: 28
+strategy: 'slda' # replay, lwf, ewc, cwr, naive
+
+dataroot: '/data/cossu'
+result_folder: '/data/cossu/experiments/esn/smnist_row/slda'
+assess_runs: 5
+
+num_classes: 10
+
+no_ray: false
+max_cpus: 30
+cpus_per_job: 3
+cuda: true
+max_gpus: 2
+gpus_per_job: 0.33
+
+### ESN
+input_size: 1000
+esn_units: 1000
+esn_layers: 1
+spectral_radius: 0.99
+input_scaling: 1
+leaky: 1
+
+### OPTIMIZER
+learning_rate: 1e-3
+epochs: 1
+batch_size: 1
+opt_name: 'adam'
+
+shrinkage: 1e-4
+
+# GRID SEARCH
+grid:
+  learning_rate:
+    - 1e-3
+    - 1e-4
+  spectral_radius:
+    - 0.99
+    - 1.5
+    - 0.5
+  shrinkage:
+    - 1e-4
+    - 1e-5
+    - 1e-3

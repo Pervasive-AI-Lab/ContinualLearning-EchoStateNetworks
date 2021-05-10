@@ -1,0 +1,49 @@
+exp_type: 'ssc_esn'
+strategy: 'ewc' # replay, lwf, ewc, cwr, naive
+
+dataroot: '/data/cossu/speech_words'
+result_folder: '/data/cossu/experiments/esn/ssc/ewc'
+assess_runs: 5
+
+no_ray: false
+max_cpus: 50
+cpus_per_job: 3
+cuda: true
+max_gpus: 2
+gpus_per_job: 0.2
+
+### ESN
+esn_units: 1000
+esn_layers: 1
+spectral_radius: 0.99
+input_scaling: 1
+conn_inp: 100
+conn_rec: 50
+feed_layers: 1
+leaky: 0.2
+
+### OPTIMIZER
+learning_rate: 1e-3
+epochs: 30
+batch_size: 128
+opt_name: 'adam'
+
+ewc_lambda: 0.4
+ewc_mode: 'separate' # 'online'
+
+# GRID SEARCH
+grid:
+  spectral_radius:
+    - 0.99
+    - 1.5
+  input_scaling:
+    - 0.5
+    - 1
+  leaky:
+    - 0.1
+    - 0.2
+  ewc_lambda:
+    - 0.1
+    - 1
+    - 10
+    - 100

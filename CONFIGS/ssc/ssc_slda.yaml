@@ -1,0 +1,52 @@
+exp_type: 'ssc_esn'
+strategy: 'slda' # replay, lwf, ewc, cwr, naive
+
+dataroot: '/data/cossu/speech_words'
+result_folder: '/data/cossu/experiments/esn/ssc/slda_test'
+assess_runs: 5
+
+no_ray: false
+max_cpus: 50
+cpus_per_job: 3
+cuda: true
+max_gpus: 2
+gpus_per_job: 0.33
+
+num_classes: 20
+
+### ESN
+input_size: 2000 # == model last hidden size
+esn_units: 2000
+esn_layers: 1
+spectral_radius: 0.99
+input_scaling: 1
+conn_inp: 100
+conn_rec: 50
+feed_layers: 1
+leaky: 0.1
+
+### OPTIMIZER
+learning_rate: 1e-2
+epochs: 3
+batch_size: 128
+opt_name: 'adam'
+
+shrinkage: 1e-5
+
+# GRID SEARCH
+grid:
+  input_scaling:
+    - 0.5
+    - 1
+  learning_rate:
+    - 1e-2
+    - 1e-3
+    - 1e-4
+  spectral_radius:
+    - 0.99
+    - 1.5
+    - 0.5
+  shrinkage:
+    - 1e-3
+    - 1e-4
+    - 1e-5
