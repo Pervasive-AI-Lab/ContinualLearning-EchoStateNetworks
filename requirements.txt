@@ -1,5 +1,6 @@
 torch
 torchaudio
+ray
 numpy
 scikit-learn
 git+git://github.com/ContinualAI/avalanche@master#egg=avalanche
