@@ -129,7 +129,7 @@ class ReservoirCell(torch.nn.Module):
 
         self.kernel = sparse_tensor_init(input_size, self.units,
                                          self.connectivity_input) * self.input_scaling
-        self.kernel = nn.Parameter(self.kernel)
+        self.kernel = nn.Parameter(self.kernel, requires_grad=False)
 
         W = sparse_recurrent_tensor_init(self.units, C=self.connectivity_recurrent)
         # re-scale the weight matrix to control the effective spectral radius
@@ -142,7 +142,7 @@ class ReservoirCell(torch.nn.Module):
             W = W * self.leaky + (I * (1 - self.leaky))
             W = spectral_norm_scaling(W, spectral_radius)
             self.recurrent_kernel = (W + I * (self.leaky - 1)) * (1 / self.leaky)
-        self.recurrent_kernel = nn.Parameter(self.recurrent_kernel)
+        self.recurrent_kernel = nn.Parameter(self.recurrent_kernel, requires_grad=False)
 
         # uniform init in [-1, +1] times input_scaling
         self.bias = (torch.rand(self.units) * 2 - 1) * self.input_scaling
