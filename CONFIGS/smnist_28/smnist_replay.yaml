@@ -3,7 +3,7 @@ pixels: 28
 strategy: 'replay' # replay, lwf, ewc
 
 dataroot: '/data/cossu'
-result_folder: '/data/cossu/experiments/esn/smnist_row/test_replay_25'
+result_folder: '/data/cossu/experiments/esn/smnist_row/replay_200'
 assess_runs: 5
 
 no_ray: false
@@ -11,7 +11,7 @@ max_cpus: 30
 cpus_per_job: 3
 cuda: true
 max_gpus: 2
-gpus_per_job: 0.33
+gpus_per_job: 0.2
 
 ### ESN
 esn_units: 1000
@@ -28,21 +28,17 @@ batch_size: 128
 opt_name: 'adam'
 
 ### REPLAY
-mem_size: 25
+mem_size: 200
 
 # GRID SEARCH
 grid:
-  esn_units:
-    - 500
-    - 1000
-    - 2000
   learning_rate:
     - 1e-2
     - 1e-3
-  spectral_radius:
-    - 0.99
-    - 1.5
-    - 0.5
   leaky:
     - 0.1
     - 1
+  batch_size:
+    - 128
+    - 256
+    - 512
